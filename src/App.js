@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './scss/app.scss'
 import Header from "./components/Header";
 import Categories from "./components/Categories";
@@ -9,11 +9,13 @@ import PizzaBlock from "./components/PizzaBlock";
 function App() {
   const [pizzas, setPizzas] = useState([])
 
-  fetch('https://6517eede582f58d62d353e2e.mockapi.io/items').then((res) => {
-    return res.json()
-  }).then((arr) => {
-    setPizzas(arr)
-  })
+  useEffect(() => {
+    fetch('https://6517eede582f58d62d353e2e.mockapi.io/items')
+      .then((res) => res.json())
+      .then((arr) => {
+        setPizzas(arr)
+      })
+  }, [])
 
   return (
     <div className="wrapper">
