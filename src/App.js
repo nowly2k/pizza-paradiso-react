@@ -4,16 +4,18 @@ import Header from "./components/Header";
 import Categories from "./components/Categories";
 import Sort from "./components/Sort";
 import PizzaBlock from "./components/PizzaBlock";
+import PizzaLoader from "./components/PizzaBlock/PizzaLoader";
 
 
 function App() {
   const [pizzas, setPizzas] = useState([])
-
+  const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
     fetch('https://6517eede582f58d62d353e2e.mockapi.io/items')
       .then((res) => res.json())
       .then((arr) => {
         setPizzas(arr)
+        setIsLoading(false)
       })
   }, [])
 
@@ -28,14 +30,16 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            {pizzas.map((obj) => (
-              <PizzaBlock key={obj.id} {...obj} />
-            ))}
+            {
+              isLoading
+                ? [... new Array(6)].map((_, index) => <PizzaLoader key={index} />)
+                : pizzas.map((obj) => (<PizzaBlock key={obj.id} {...obj} />))
+            }
           </div>
         </div>
       </div>
     </div>
   );
 }
-
+// pizzas.map((obj) => (<PizzaBlock key={obj.id} {...obj} />))
 export default App;
