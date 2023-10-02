@@ -32,7 +32,7 @@ function App() {
           <div className="content__items">
             {
               isLoading
-                ? [... new Array(6)].map((_, index) => <PizzaLoader key={index} />)
+                ? [...new Array(6)].map((_, index) => <PizzaLoader key={index} />)
                 : pizzas.map((obj) => (<PizzaBlock key={obj.id} {...obj} />))
             }
           </div>
