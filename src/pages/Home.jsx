@@ -16,10 +16,11 @@ function Home() {
         setPizzas(arr);
         setIsLoading(false);
       });
+    window.scrollTo(0, 0);
   }, []);
 
   return (
-    <>
+    <div className="container">
       <div className="content__top">
         <Categories />
         <Sort />
@@ -30,7 +31,7 @@ function Home() {
           ? [...new Array(6)].map((_, index) => <PizzaLoader key={index} />)
           : pizzas.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
       </div>
-    </>
+    </div>
   );
 }
 
