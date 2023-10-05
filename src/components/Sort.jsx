@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Sort() {
+function Sort(props) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(0);
   const list = ["популярности", "цене", "алфавиту"];
@@ -9,6 +9,7 @@ function Sort() {
   const onSelectList = (name, i) => {
     setSelected(i);
     setOpen(false);
+    props.onTypeChange(selected);
   };
 
   return (
