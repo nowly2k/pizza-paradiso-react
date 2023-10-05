@@ -1,8 +1,6 @@
-import { useState } from "react";
+import React from "react";
 
 export default function Categories({ value, onClickCategory }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   const categories = [
     "Все",
     "Мясные",

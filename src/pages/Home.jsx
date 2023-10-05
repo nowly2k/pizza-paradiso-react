@@ -9,14 +9,15 @@ function Home() {
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [categoryId, setCategoryId] = useState(0);
-  const [sortType, setSortType] = useState(0);
+  const [sortTypeIndex, setSortTypeIndex] = useState(0);
+  const sortTypes = ["rating", "price", "title"];
 
   useEffect(() => {
     setIsLoading(true);
     fetch(
-      categoryId === 0
-        ? `https://6517eede582f58d62d353e2e.mockapi.io/items`
-        : `https://6517eede582f58d62d353e2e.mockapi.io/items?category=${categoryId}`
+      `https://6517eede582f58d62d353e2e.mockapi.io/items?${
+        categoryId > 0 ? `category=${categoryId}` : ""
+      }&sortBy=${sortTypes[sortTypeIndex]}`
     )
       .then((res) => res.json())
       .then((arr) => {
@@ -24,7 +25,7 @@ function Home() {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId]);
+  }, [categoryId, sortTypeIndex]);
 
   return (
     <div className="container">
@@ -33,7 +34,7 @@ function Home() {
           value={categoryId}
           onClickCategory={(i) => setCategoryId(i)}
         />
-        <Sort />
+        <Sort value={sortTypeIndex} onChangeSort={(i) => setSortTypeIndex(i)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">

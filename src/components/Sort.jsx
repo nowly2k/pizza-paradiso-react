@@ -1,15 +1,13 @@
 import { useState } from "react";
 
-function Sort(props) {
+function Sort({ value, onChangeSort }) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(0);
   const list = ["популярности", "цене", "алфавиту"];
-  const sortName = list[selected];
+  const sortName = list[value];
 
   const onSelectList = (name, i) => {
-    setSelected(i);
     setOpen(false);
-    props.onTypeChange(selected);
+    onChangeSort(i);
   };
 
   return (
@@ -37,7 +35,7 @@ function Sort(props) {
               <li
                 key={i}
                 onClick={() => onSelectList(name, i)}
-                className={selected === i ? "active" : ""}
+                className={value === i ? "active" : ""}
               >
                 {name}
               </li>
